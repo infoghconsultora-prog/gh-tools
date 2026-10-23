@@ -19,6 +19,7 @@
 <link rel="apple-touch-icon" sizes="152x152" href="icons/icon-152.png">
 <link rel="apple-touch-icon" sizes="167x167" href="icons/icon-167.png">
 <link rel="apple-touch-icon" sizes="180x180" href="icons/icon-180.png">
+<script>try{var e=localStorage.getItem('gh-escala:gh-tools');if(e==='115'||e==='130'||e==='150')document.documentElement.setAttribute('data-escala',e)}catch(_){}</script>
 <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -26,6 +27,7 @@
   <header class="topbar">
     <img class="logo" src="logo-gh.png" alt="GH Consultora" width="62" height="30">
     <h1>GH TOOLS</h1>
+    <button type="button" class="gh-esc icon-btn" id="btnEscala" aria-label="Agrandar letra" title="Agrandar letra"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3M11 8v6M8 11h6"/></svg><span class="gh-esc-n" id="escalaNivel" aria-hidden="true"></span></button><span class="gh-esc-sr" id="escalaLive" role="status" aria-live="polite"></span>
     <button class="icon-btn" id="btnTema" aria-label="Cambiar tema">
       <svg viewBox="0 0 24 24"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
     </button>
@@ -36,6 +38,25 @@
     <p class="muted foot">Para entrar a cada una usás tu cuenta de Google del equipo.</p>
   </main>
 </div>
+<script>
+/* Tamaño de interfaz: 100 -> 115 -> 130 -> 150 -> 100. Se recuerda por app; sin localStorage sigue andando. */
+(function(){
+  var K='gh-escala:gh-tools',N=[100,115,130,150],h=document.documentElement,b=document.getElementById('btnEscala');
+  if(!b)return;
+  function leer(){try{var v=parseInt(localStorage.getItem(K),10);return N.indexOf(v)<0?100:v}catch(e){return 100}}
+  function poner(v,avisar){
+    if(v===100)h.removeAttribute('data-escala');else h.setAttribute('data-escala',v);
+    document.getElementById('escalaNivel').textContent=v===100?'':v+'%';
+    b.title='Agrandar letra (ahora '+v+'%)';
+    if(avisar)document.getElementById('escalaLive').textContent='Tamaño de la interfaz: '+v+'%';
+  }
+  var v=leer();poner(v,false);
+  b.addEventListener('click',function(){
+    v=N[(N.indexOf(v)+1)%N.length];poner(v,true);
+    try{if(v===100)localStorage.removeItem(K);else localStorage.setItem(K,String(v))}catch(e){}
+  });
+})();
+</script>
 <script src="app.js"></script>
 </body>
 </html>
