@@ -168,6 +168,7 @@ html[data-escala="150"]{zoom:1.5;--gh-z:1.5}
 .gh-esc-n{position:absolute;left:50%;transform:translateX(-50%);bottom:-9px;min-width:30px;padding:0 4px;border-radius:999px;background:#4a7a1e;color:#fff;
   font:700 11px/16px -apple-system,"SF Pro Text",system-ui,sans-serif;text-align:center}
 .gh-esc-n:empty{display:none}
+.gh-esc[hidden]{display:none}
 .gh-esc-sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
 @supports not (zoom:1){.gh-esc{display:none}}
 /* con zoom, vh/dvh también se multiplican: se divide para que las pantallas altas sigan midiendo el alto real */
@@ -177,3 +178,5 @@ html[data-escala="150"]{zoom:1.5;--gh-z:1.5}
 .icon-btn.gh-esc:active{background:var(--fill, var(--gray-6))}
 .topbar h1 { min-width: 0; }
 html[data-escala="130"] .topbar, html[data-escala="150"] .topbar { gap: 4px; padding-left: 10px; padding-right: 10px; }
+html[data-escala="130"] .topbar img.logo, html[data-escala="150"] .topbar img.logo { display: none; }
+html[data-escala="130"] .topbar h1, html[data-escala="150"] .topbar h1 { font-size: 16px; line-height: 20px; }

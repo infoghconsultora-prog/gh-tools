@@ -27,7 +27,7 @@
   <header class="topbar">
     <img class="logo" src="logo-gh.png" alt="GH Consultora" width="62" height="30">
     <h1>GH TOOLS</h1>
-    <button type="button" class="gh-esc icon-btn" id="btnEscala" aria-label="Agrandar letra" title="Agrandar letra"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3M11 8v6M8 11h6"/></svg><span class="gh-esc-n" id="escalaNivel" aria-hidden="true"></span></button><span class="gh-esc-sr" id="escalaLive" role="status" aria-live="polite"></span>
+    <button type="button" class="gh-esc icon-btn" id="btnEscalaMenos" aria-label="Achicar letra" title="Achicar letra" hidden><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3M8 11h6"/></svg></button><button type="button" class="gh-esc icon-btn" id="btnEscala" aria-label="Agrandar letra" title="Agrandar letra"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3M11 8v6M8 11h6"/></svg><span class="gh-esc-n" id="escalaNivel" aria-hidden="true"></span></button><span class="gh-esc-sr" id="escalaLive" role="status" aria-live="polite"></span>
     <button class="icon-btn" id="btnTema" aria-label="Cambiar tema">
       <svg viewBox="0 0 24 24"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
     </button>
@@ -46,15 +46,14 @@
   function leer(){try{var v=parseInt(localStorage.getItem(K),10);return N.indexOf(v)<0?100:v}catch(e){return 100}}
   function poner(v,avisar){
     if(v===100)h.removeAttribute('data-escala');else h.setAttribute('data-escala',v);
-    document.getElementById('escalaNivel').textContent=v===100?'':v+'%';
+    document.getElementById('escalaNivel').textContent=v===100?'':v+'%';var m=document.getElementById('btnEscalaMenos');if(m)m.hidden=(v===100);
     b.title='Agrandar letra (ahora '+v+'%)';
     if(avisar)document.getElementById('escalaLive').textContent='Tamaño de la interfaz: '+v+'%';
   }
   var v=leer();poner(v,false);
-  b.addEventListener('click',function(){
-    v=N[(N.indexOf(v)+1)%N.length];poner(v,true);
-    try{if(v===100)localStorage.removeItem(K);else localStorage.setItem(K,String(v))}catch(e){}
-  });
+  function ir(n){v=n;poner(v,true);try{if(v===100)localStorage.removeItem(K);else localStorage.setItem(K,String(v))}catch(e){}}
+  b.addEventListener('click',function(){ir(N[(N.indexOf(v)+1)%N.length])});
+  var m=document.getElementById('btnEscalaMenos');if(m)m.addEventListener('click',function(){ir(N[Math.max(0,N.indexOf(v)-1)])});
 })();
 </script>
 <script src="app.js"></script>

@@ -1,6 +1,6 @@
 /* GH TOOLS — Copyright (c) 2026 Felipe Manrique. Todos los derechos reservados. */
 // Cache de la cáscara para abrir sin señal. SUBIR VERSION EN CADA CAMBIO (si no, los teléfonos nunca lo reciben).
-const VERSION = 'gh-tools-v1.2.1';
+const VERSION = 'gh-tools-v1.2.2';
 const PREFIJO = 'gh-tools-v';
 const SHELL = ['./', 'index.html', 'styles.css', 'app.js', 'manifest.webmanifest', 'icons/icon-192.png', 'icons/icon-512.png',
   'icons/icon-32.png', 'icons/icon-maskable-512.png', 'apple-touch-icon.png', 'logo-gh.png',
